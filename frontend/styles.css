@@ -1,0 +1,266 @@
+/* ==========================================================================
+   Design Tokens & Modern Variables 
+   ========================================================================== */
+   :root {
+    --bg-color: #0f172a;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-glow: #38bdf8;
+    --accent-purple: #c084fc;
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --drop-zone-border: rgba(56, 189, 248, 0.4);
+    --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    
+    --font-main: 'Inter', sans-serif;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(56, 189, 248, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(192, 132, 252, 0.15), transparent 25%);
+    background-attachment: fixed;
+    padding: 2rem 1rem;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.hidden { display: none !important; }
+.flex-col { display: flex; flex-direction: column; gap: 1rem; }
+
+/* ==========================================================================
+   Typography & Headers
+   ========================================================================== */
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+header .logo { font-size: 3rem; margin-bottom: 0.5rem; }
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--accent-glow), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header p { color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 0.75rem;
+}
+
+/* ==========================================================================
+   Components: Glass Panels
+   ========================================================================== */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+}
+
+/* ==========================================================================
+   Upload Area
+   ========================================================================== */
+.upload-section {
+    max-width: 700px;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+}
+
+.drop-zone {
+    border: 2px dashed var(--drop-zone-border);
+    border-radius: 12px;
+    padding: 4rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(15, 23, 42, 0.5);
+}
+
+.drop-zone:hover, .drop-zone.dragover {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: var(--accent-glow);
+    transform: scale(1.02);
+}
+
+.upload-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--accent-glow);
+    margin-bottom: 1rem;
+}
+
+.browse-link { color: var(--accent-glow); text-decoration: underline; font-weight: 600; }
+
+/* ==========================================================================
+   Loading Spinner
+   ========================================================================== */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+    animation: fadeIn 0.5s ease;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--glass-border);
+    border-top-color: var(--accent-glow);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   Results Grid
+   ========================================================================== */
+.results-section { animation: fadeIn 0.8s ease-out; }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .grid-container { grid-template-columns: 1fr 1fr; }
+}
+
+.metric {
+    background: rgba(0,0,0,0.3);
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--glass-border);
+}
+
+.metric .label { font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+.metric .value { font-size: 1.5rem; font-weight: 800; }
+
+.gradient-text {
+    background: linear-gradient(90deg, #34d399, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.image-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    background: #000;
+}
+
+.image-wrapper img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.logic-box {
+    background: rgba(56, 189, 248, 0.05);
+    border-left: 3px solid var(--accent-glow);
+    padding: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border-radius: 0 8px 8px 0;
+}
+
+.markdown-body {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+    color: #fff;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.markdown-body ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+.markdown-body p { margin-bottom: 1rem; }
+.markdown-body strong { color: var(--accent-purple); }
+
+/* ==========================================================================
+   Buttons & Alerts
+   ========================================================================== */
+.btn-reset {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.btn-reset:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+}
+
+.error-banner {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    color: #fca5a5;
+    padding: 1rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+/* Animations */
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }

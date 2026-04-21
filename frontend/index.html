@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Haircut Stylist & Face Shape Analyzer</title>
+    <!-- Modern Typography: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="logo">✂️</div>
+            <h1>AI Haircut Stylist</h1>
+            <p>Upload a portrait to reveal your mathematical face shape geometry and get AI-curated haircut styles instantly.</p>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Upload Area Section -->
+            <section class="upload-section glass-panel" id="uploadPanel">
+                <div class="drop-zone" id="dropZone">
+                    <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                    </svg>
+                    <p>Drag & Drop your photo here or <span class="browse-link">Browse</span></p>
+                    <input type="file" id="fileInput" accept="image/png, image/jpeg, image/jpg" hidden>
+                </div>
+            </section>
+
+            <!-- Loading Spinner -->
+            <div class="loader-container hidden" id="loader">
+                <div class="spinner"></div>
+                <p>Analyzing geometry and generating styles (powered by Groq)...</p>
+            </div>
+
+            <!-- Error Banner -->
+            <div class="error-banner hidden" id="errorBanner"></div>
+
+            <!-- Results Section -->
+            <section class="results-section hidden" id="resultsPanel">
+                
+                <div class="grid-container">
+                    <!-- Phase 1: CV Proof -->
+                    <div class="result-card glass-panel flex-col">
+                        <h3>🎓 Phase 1: Geometric Detection</h3>
+                        <div class="metric">
+                            <span class="label">Calculated Face Shape</span>
+                            <span class="value gradient-text" id="faceShapeVal">Oval</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">Identified Gender</span>
+                            <span class="value gradient-text" id="genderVal">Unknown</span>
+                        </div>
+                        <div class="image-wrapper">
+                            <img id="processedImage" alt="Visual Proof" />
+                            <div class="badge">Visual Proof</div>
+                        </div>
+                        <div class="logic-box" id="logicSummary"></div>
+                    </div>
+
+                    <!-- Phase 2: LLM Stylist Advice -->
+                    <div class="result-card glass-panel flex-col">
+                        <h3>💈 Phase 2: AI Recommendations</h3>
+                        <div class="markdown-body" id="recommendationsOutput">
+                            <!-- Recommendations go here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn-reset" id="resetBtn">Analyze Another Photo</button>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Render markdown directly in browser nicely -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
