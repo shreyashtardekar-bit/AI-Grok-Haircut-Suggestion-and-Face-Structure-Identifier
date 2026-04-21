@@ -6,6 +6,7 @@ import base64
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 
 # Load Environment Variables from .env file
@@ -207,7 +208,12 @@ async def analyze_face(file: UploadFile = File(...)):
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": f"Server Error: {str(e)}"})
 
-# Root route for server health check
-@app.get("/")
+# Health check route
+@app.get("/health")
 def read_root():
     return {"status": "ok", "message": "AI Stylist Backend is running!"}
+
+# Mount the frontend directory to serve the static HTML/JS/CSS files at the root
+frontend_path = os.path.join(os.path.dirname(__file__), "..", "frontend")
+if os.path.exists(frontend_path):
+    app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Note: If deploying, change this to your production backend URL
-    const API_URL = "http://localhost:8000/api/analyze";
+    const API_URL = "/api/analyze";
 
     const dropZone = document.getElementById("dropZone");
     const fileInput = document.getElementById("fileInput");

@@ -1,3 +1,11 @@
+---
+title: AI Haircut Stylist
+emoji: ✂️
+colorFrom: blue
+colorTo: purple
+sdk: docker
+app_port: 7860
+---
 # AI Haircut Stylist & Face Structure Identifier
 
 An incredibly accurate, AI-powered stylist that uses Computer Vision to mathematically deduce your face shape and Large Language Models (LLMs) to recommend the most flattering haircuts.
