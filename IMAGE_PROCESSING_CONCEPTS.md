@@ -737,4 +737,4 @@ This uploads all project files directly to the Space's Git repository using the 
 
 ---
 
-*This document was generated as part of the AI Haircut Stylist & Face Structure Identifier project.*
+*Created By Shreyash Sanjay Tardekar.*
