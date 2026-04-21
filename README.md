@@ -9,6 +9,19 @@ An incredibly accurate, AI-powered stylist that uses Computer Vision to mathemat
 - **AI Stylist via Groq API:** Uses Llama 3 (via Groq for lightning-fast inference) as an expert master stylist. It receives your exact face shape and gender to output personalized, trending haircut recommendations that balance your facial proportions.
 - **Interactive UI:** A highly polished, premium custom frontend using Vanilla JS with an intuitive Drag-and-Drop image upload.
 
+## 🔍 Deep Dive: Image Processing Pipeline
+
+The app uses classic computer vision techniques instead of a heavy neural network for face shape classification. Here is the step-by-step pipeline:
+
+1. **Preprocessing**: The uploaded image is converted to Grayscale and passed through a `cv2.GaussianBlur` to reduce noise and unnecessary details.
+2. **Dynamic Edge Detection**: We compute the median pixel intensity of the image and calculate custom upper and lower thresholds based on the median to feed into `cv2.Canny`. This ensures the edges are dynamically captured regardless of lighting conditions.
+3. **Morphological Dilation**: Small gaps in the detected edges are closed using `cv2.dilate` with a rectangular kernel, ensuring facial outlines run continuously.
+4. **Contour Extraction & Smoothing**: `cv2.findContours` identifies the largest, most prominent shape structure. It is then smoothed mathematically using `cv2.approxPolyDP` to form a geometric bounding representation of the jawline and face.
+5. **Geometry & Eye Tracking**: The absolute face length ($H$) and width ($W$) are extracted via bounding boxes. We utilize Haar Cascades (`haarcascade_eye.xml`) to calculate specific forehead/upper-face width.
+6. **Shape Classification Logic**: 
+    - **Jawline Taper Metric**: We measure the area of the smoothed contour divided by the rectangular bounding box area ($W \times H$).
+    - **Length-to-Width Ratio**: A high ratio ($>1.35$) helps differentiate Oblong, Oval, and Diamond shapes, whereas broad ratios assist in finding Square, Round, and Heart shapes based on the Jawline Taper Extent.
+
 ## 🛠️ Technology Stack
 - **Backend**: Python, FastAPI, Uvicorn 
 - **AI & Vision**: OpenCV, Groq API (Llama 3 70b-versatile)
